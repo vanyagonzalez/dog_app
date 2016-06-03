@@ -1,13 +1,11 @@
 package com.piv.repositories;
 
 import com.piv.model.Dog;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Repository
 public class DogRepository {
     public static final List<Dog> DOGS = new ArrayList<Dog>();
     static {
