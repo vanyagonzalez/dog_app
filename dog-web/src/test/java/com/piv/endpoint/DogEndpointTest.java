@@ -3,7 +3,6 @@ package com.piv.endpoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.restassured.http.ContentType;
 import com.piv.model.Dog;
-import com.piv.repositories.DogRepository;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
