@@ -18,4 +18,9 @@
     <bean class="com.piv.endpoint.DogEndpoint">
         <property name="dogService" ref="dogService"/>
     </bean>
+
+    <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer" init-method="start" destroy-method="stop">
+        <constructor-arg value="-web,-webPort,8082"/>
+    </bean>
+
 </beans>

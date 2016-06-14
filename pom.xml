@@ -29,6 +29,7 @@
     <jackson.version>2.6.6</jackson.version>
     <rest-assured.version>2.9.0</rest-assured.version>
     <testng.version>6.9.10</testng.version>
+    <h2.version>1.4.191</h2.version>
 
   </properties>
 
@@ -95,6 +96,12 @@
         <artifactId>testng</artifactId>
         <version>${testng.version}</version>
         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>${h2.version}</version>
       </dependency>
 
     </dependencies>
