@@ -15,4 +15,8 @@ public class DogService {
     public List<Dog> getAllDogs() {
         return dogRepository.getAllDogs();
     }
+
+    public Dog createDog(Dog dog) {
+        return dogRepository.createDog(dog);
+    }
 }

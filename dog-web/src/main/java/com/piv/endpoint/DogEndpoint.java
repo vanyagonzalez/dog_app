@@ -21,4 +21,9 @@ public class DogEndpoint {
     public List<Dog> getAllDogs() {
         return dogService.getAllDogs();
     }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/dog")
+    public Dog createDog(@RequestBody Dog dog) {
+        return dogService.createDog(dog);
+    }
 }

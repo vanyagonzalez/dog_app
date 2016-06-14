@@ -17,4 +17,9 @@ public class DogRepository {
     public List<Dog> getAllDogs() {
         return DOGS;
     }
+
+    public Dog createDog(Dog dog) {
+        DOGS.add(dog);
+        return dog;
+    }
 }
