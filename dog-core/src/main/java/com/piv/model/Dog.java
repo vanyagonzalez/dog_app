@@ -6,9 +6,11 @@ import lombok.*;
 import java.util.Date;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "dogId")
 public class Dog {
+    private Integer dogId;
     private String name;
     private Date dateOfBirth;
-    private Double height, weight;
+    private Double height;
+    private Double weight;
 }

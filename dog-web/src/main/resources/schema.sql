@@ -1,7 +1,7 @@
 CREATE TABLE DOG (
-    DOG_ID            NUMBER(22) PRIMARY KEY,
+    DOG_ID            INTEGER(22) PRIMARY KEY,
     NAME              VARCHAR2(30),
     DATE_OF_BIRTH     TIMESTAMP(3) DEFAULT SYSDATE,
-    HEIGHT            DECIMAL,
-    WEIGHT            DECIMAL
+    HEIGHT            DOUBLE,
+    WEIGHT            DOUBLE
 );

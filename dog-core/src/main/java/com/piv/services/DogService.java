@@ -1,22 +1,23 @@
 package com.piv.services;
 
 import com.piv.model.Dog;
-import com.piv.repositories.DogRepository;
+import com.piv.repositories.DogRepositoryInMemory;
+import com.piv.repositories.DogRepositoryInterface;
 
 import java.util.List;
 
 public class DogService {
-    private DogRepository dogRepository;
+    private DogRepositoryInterface dogRepositoryInterface;
 
-    public void setDogRepository(DogRepository dogRepository) {
-        this.dogRepository = dogRepository;
+    public void setDogRepositoryInterface(DogRepositoryInterface dogRepositoryInterface) {
+        this.dogRepositoryInterface = dogRepositoryInterface;
     }
 
     public List<Dog> getAllDogs() {
-        return dogRepository.getAllDogs();
+        return dogRepositoryInterface.getAllDogs();
     }
 
     public Dog createDog(Dog dog) {
-        return dogRepository.createDog(dog);
+        return dogRepositoryInterface.createDog(dog);
     }
 }

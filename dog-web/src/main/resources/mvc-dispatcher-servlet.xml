@@ -2,7 +2,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
    http://www.springframework.org/schema/context
@@ -10,14 +10,45 @@
    http://www.springframework.org/schema/mvc
    http://www.springframework.org/schema/mvc/spring-mvc.xsd
    http://www.springframework.org/schema/jdbc
-   http://www.springframework.org/schema/jdbc/spring-jdbc.xsd ">
+   http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <mvc:annotation-driven/>
 
-    <bean id="dogRepository" class="com.piv.repositories.DogRepository"/>
-    <bean id="dogService" class="com.piv.services.DogService">
-        <property name="dogRepository" ref="dogRepository"/>
+    <jdbc:embedded-database id="dog" type="H2">
+        <jdbc:script location="classpath:schema.sql"/>
+        <jdbc:script location="classpath:test-data.sql"/>
+    </jdbc:embedded-database>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:dog"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
     </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" />
+
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!--<bean id="dogRepositoryInMemory" class="com.piv.repositories.DogRepositoryInMemory"/>-->
+
+    <bean id="dogRepositoryHibernate" class="com.piv.repositories.DogRepositoryHibernate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="dogService" class="com.piv.services.DogService">
+        <property name="dogRepositoryInterface" ref="dogRepositoryHibernate"/>
+    </bean>
+
     <bean class="com.piv.endpoint.DogEndpoint">
         <property name="dogService" ref="dogService"/>
     </bean>
@@ -26,11 +57,5 @@
           destroy-method="stop">
         <constructor-arg value="-web,-webPort,8082"/>
     </bean>
-
-
-    <jdbc:embedded-database id="dog" type="H2">
-        <jdbc:script location="classpath:schema.sql"/>
-        <jdbc:script location="classpath:test-data.sql"/>
-    </jdbc:embedded-database>
 
 </beans>

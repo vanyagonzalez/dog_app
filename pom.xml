@@ -30,6 +30,7 @@
     <rest-assured.version>2.9.0</rest-assured.version>
     <testng.version>6.9.10</testng.version>
     <h2.version>1.4.191</h2.version>
+    <hibernate-core.version>5.2.0.Final</hibernate-core.version>
 
   </properties>
 
@@ -67,7 +68,13 @@
 
       <dependency>
         <groupId>org.springframework</groupId>
-        <artifactId>spring-jdbc</artifactId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
         <version>${spring.version}</version>
       </dependency>
 
@@ -108,6 +115,18 @@
         <groupId>com.h2database</groupId>
         <artifactId>h2</artifactId>
         <version>${h2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${hibernate-core.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-dbcp</groupId>
+        <artifactId>commons-dbcp</artifactId>
+        <version>1.4</version>
       </dependency>
 
     </dependencies>

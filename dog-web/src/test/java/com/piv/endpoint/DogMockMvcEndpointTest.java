@@ -2,17 +2,15 @@ package com.piv.endpoint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.piv.model.Dog;
-import com.piv.repositories.DogRepository;
+import com.piv.repositories.DogRepositoryInMemory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -44,7 +42,7 @@ public class DogMockMvcEndpointTest extends AbstractTestNGSpringContextTests {
 
         ObjectMapper objectMapper = new ObjectMapper();
         List<Dog> dogs = objectMapper.readValue(dogBody, objectMapper.getTypeFactory().constructCollectionType(List.class, Dog.class));
-        assertEquals(DogRepository.DOGS.size(), dogs.size());
+        assertEquals(DogRepositoryInMemory.DOGS.size(), dogs.size());
 
         System.out.println("hello");
     }
