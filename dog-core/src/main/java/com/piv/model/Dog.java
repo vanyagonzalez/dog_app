@@ -5,12 +5,16 @@ import lombok.*;
 
 import java.util.Date;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor @RequiredArgsConstructor
 @EqualsAndHashCode(of = "dogId")
 public class Dog {
-    private Integer dogId;
+    private Long dogId;
+    @NonNull
     private String name;
+    @NonNull
     private Date dateOfBirth;
+    @NonNull
     private Double height;
+    @NonNull
     private Double weight;
 }

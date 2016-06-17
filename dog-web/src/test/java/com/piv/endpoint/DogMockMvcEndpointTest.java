@@ -43,7 +43,5 @@ public class DogMockMvcEndpointTest extends AbstractTestNGSpringContextTests {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Dog> dogs = objectMapper.readValue(dogBody, objectMapper.getTypeFactory().constructCollectionType(List.class, Dog.class));
         assertEquals(DogRepositoryInMemory.DOGS.size(), dogs.size());
-
-        System.out.println("hello");
     }
 }

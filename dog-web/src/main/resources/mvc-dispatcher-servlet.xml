@@ -16,9 +16,13 @@
 
     <mvc:annotation-driven/>
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:application.properties"/>
+    </bean>
+
     <jdbc:embedded-database id="dog" type="H2">
         <jdbc:script location="classpath:schema.sql"/>
-        <jdbc:script location="classpath:test-data.sql"/>
+        <!--<jdbc:script location="classpath:test-data.sql"/>-->
     </jdbc:embedded-database>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -39,14 +43,14 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-    <!--<bean id="dogRepositoryInMemory" class="com.piv.repositories.DogRepositoryInMemory"/>-->
+    <bean id="dogRepositoryInMemory" class="com.piv.repositories.DogRepositoryInMemory"/>
 
     <bean id="dogRepositoryHibernate" class="com.piv.repositories.DogRepositoryHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="dogService" class="com.piv.services.DogService">
-        <property name="dogRepositoryInterface" ref="dogRepositoryHibernate"/>
+    <bean id="dogService" class="com.piv.services.DogService" init-method="init">
+        <property name="dogRepositoryInterface" ref="${dog.dao.implementation:dogRepositoryInMemory}"/>
     </bean>
 
     <bean class="com.piv.endpoint.DogEndpoint">
