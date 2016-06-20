@@ -1,8 +1,9 @@
 package com.piv.endpoint;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.restassured.http.ContentType;
 import com.piv.model.Dog;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -20,7 +21,12 @@ public class DogEndpointTest {
         List<Dog> dogs = new ArrayList<>(Arrays.asList(dogsArray));
         int oldSize = dogs.size();
 
-        Dog newDog = new Dog("qqq", new Date(), 4d, 4d);
+        Dog newDog = new Dog(
+                RandomStringUtils.randomAscii(RandomUtils.nextInt(1, 10))
+                , new Date()
+                , RandomUtils.nextDouble(0, Double.MAX_VALUE)
+                , RandomUtils.nextDouble(0, Double.MAX_VALUE)
+        );
         newDog = given().body(newDog).contentType(ContentType.JSON).post("/dog-web/dog").andReturn().as(Dog.class);
 
         dogsArray = given().get("/dog-web/dogs").andReturn().as(Dog[].class);
