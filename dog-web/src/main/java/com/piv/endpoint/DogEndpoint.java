@@ -24,6 +24,10 @@ public class DogEndpoint {
 
     @RequestMapping(method = RequestMethod.POST, path = "/dog")
     public Dog createDog(@RequestBody Dog dog) {
-        return dogService.createDog(dog);
+        try {
+            return dogService.createDog(dog);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

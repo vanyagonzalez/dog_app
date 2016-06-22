@@ -21,12 +21,7 @@ public class DogEndpointTest {
         List<Dog> dogs = new ArrayList<>(Arrays.asList(dogsArray));
         int oldSize = dogs.size();
 
-        Dog newDog = new Dog(
-                RandomStringUtils.randomAscii(RandomUtils.nextInt(1, 10))
-                , new Date()
-                , RandomUtils.nextDouble(0, Double.MAX_VALUE)
-                , RandomUtils.nextDouble(0, Double.MAX_VALUE)
-        );
+        Dog newDog = Dog.random();
         newDog = given().body(newDog).contentType(ContentType.JSON).post("/dog-web/dog").andReturn().as(Dog.class);
 
         dogsArray = given().get("/dog-web/dogs").andReturn().as(Dog[].class);

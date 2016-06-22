@@ -1,5 +1,7 @@
 package com.piv.repositories;
 
+import com.piv.exception.NegativeHeightException;
+import com.piv.exception.NegativeWeightException;
 import com.piv.model.Dog;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -24,7 +26,7 @@ public class DogRepositoryHibernate implements DogRepositoryInterface {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public List<Dog> getAllDogs() {
         Session session = getSessionFactory().getCurrentSession();
         Query query = session.createQuery("from Dog");
@@ -33,10 +35,18 @@ public class DogRepositoryHibernate implements DogRepositoryInterface {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public Dog createDog(Dog dog) {
         Session session = getSessionFactory().getCurrentSession();
         session.save(dog);
+
+        if (dog.getHeight() < 0) {
+            throw new NegativeHeightException();
+        }
+
+        if (dog.getWeight() < 0) {
+            throw new NegativeWeightException();
+        }
 
         return dog;
     }

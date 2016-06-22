@@ -24,7 +24,7 @@ public class DogService {
 
     public void init() {
         for(int i = 1; i < 11; i++) {
-            createDog(new Dog("name" + i, new Date(), (double)i, (double)i));
+            createDog(Dog.random());
         }
     }
 }
