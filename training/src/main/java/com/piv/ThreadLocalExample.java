@@ -1,7 +1,7 @@
 package com.piv;
 
 /**
- * Created by Ivan_Pavlyukovets on 11/21/2016.
+ * commit 1
  */
 public class ThreadLocalExample {
     public static class MyRunnable implements Runnable {
