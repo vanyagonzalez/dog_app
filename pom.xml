@@ -13,6 +13,7 @@
   <modules>
     <module>dog-core</module>
     <module>dog-web</module>
+    <module>training</module>
   </modules>
 
   <properties>
