@@ -15,11 +15,21 @@ public class DogRepositoryInMemory implements DogRepositoryInterface {
     }
 
     @Override
+    public Dog getById(Long dogId) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public Dog createDog(Dog dog) {
         synchronized (DOGS) {
             dog.setDogId((long)(DOGS.size() + 1));
             DOGS.add(dog);
         }
         return dog;
+    }
+
+    @Override
+    public Dog updateDog(Dog dog) {
+        throw new UnsupportedOperationException();
     }
 }

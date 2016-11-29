@@ -10,7 +10,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Set;
 
 import static org.testng.Assert.*;

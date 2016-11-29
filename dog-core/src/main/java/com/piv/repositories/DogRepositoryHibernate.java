@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -35,6 +36,12 @@ public class DogRepositoryHibernate implements DogRepositoryInterface {
     }
 
     @Override
+    public Dog getById(Long dogId) {
+        Session session = getSessionFactory().getCurrentSession();
+        return session.get(Dog.class, dogId);
+    }
+
+    @Override
 //    @Transactional
     public Dog createDog(Dog dog) {
         Session session = getSessionFactory().getCurrentSession();
@@ -49,5 +56,12 @@ public class DogRepositoryHibernate implements DogRepositoryInterface {
         }
 
         return dog;
+    }
+
+    @Override
+    public Dog updateDog(Dog dog) {
+        Session session = getSessionFactory().getCurrentSession();
+        Serializable id = session.save(dog);
+        return session.get(Dog.class, id);
     }
 }

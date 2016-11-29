@@ -1,6 +1,7 @@
 package com.piv.repositories;
 
 import com.piv.model.Dog;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -10,5 +11,10 @@ import java.util.List;
 public interface DogRepositoryInterface {
     List<Dog> getAllDogs();
 
+    Dog getById(Long dogId);
+
     Dog createDog(Dog dog);
+
+    @Transactional
+    Dog updateDog(Dog dog);
 }
